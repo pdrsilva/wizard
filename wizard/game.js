@@ -28,7 +28,7 @@ Barrier.prototype.update = function(){
     if(this.x < 0){
         this.destroy();
     }
-}
+};
 
 window.onload = function() {
     game = new Phaser.Game(960,640, Phaser.AUTO, "");
@@ -38,7 +38,7 @@ window.onload = function() {
     game.state.add("PlayGame", playGame);
     game.state.add("GameOverScreen", gameOverScreen);
     game.state.start("Boot");
-}
+};
 
 var boot = function(game){};
 boot.prototype = {
@@ -51,7 +51,7 @@ boot.prototype = {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.state.start("Preload");
     }
-}
+};
 
 var preload = function(game){};
 preload.prototype = {
@@ -69,7 +69,7 @@ preload.prototype = {
     create: function(){
         this.game.state.start("TitleScreen");
     }
-}
+};
 
 var titleScreen = function(game){};
 titleScreen.prototype = {
@@ -88,7 +88,7 @@ titleScreen.prototype = {
     startGame: function(){
         game.state.start("PlayGame");
     }
-}
+};
 
 var playGame = function(game){};
 playGame.prototype = {
@@ -114,9 +114,9 @@ playGame.prototype = {
         game.add.existing(barrier);
         group.add(barrier);
     }
-}
+};
 
 var gameOverScreen = function(game){};
 gameOverScreen.prototype = {
     
-}
+};
