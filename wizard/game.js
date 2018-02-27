@@ -3,6 +3,8 @@ var bgColor = 0x588c73;
 var gameBackgroundHeight = 256;
 var barrierSpeed = 280;
 var barrierGap = -200;
+var landscapeHeight;
+var landscape;
 
 Barrier = function(game, speed, tintColor){
     var position = (game.height + gameBackgroundHeight)/2;
@@ -28,6 +30,8 @@ Barrier.prototype.update = function(){
     if(this.x < 0){
         this.destroy();
     }
+    
+    landscape.tilePosition.x -= 4.5;
 };
 
 window.onload = function() {
@@ -65,6 +69,7 @@ preload.prototype = {
         game.load.image("wall", "assets/sprites/wall.png");
         game.load.image("wizard", "assets/sprites/wizard.png");
         game.load.image("barrier", "assets/sprites/barrier.png");
+        game.load.image("landscape", "assets/sprites/grass.png");
     },
     create: function(){
         this.game.state.start("TitleScreen");
@@ -93,6 +98,7 @@ titleScreen.prototype = {
 var playGame = function(game){};
 playGame.prototype = {
     create: function(){
+        landscapeHeight = game.cache.getImage('landscape').height;
         var tintColor = bgColor;
         var gameBG = game.add.tileSprite(0, 0, game.width, game.height, "gamebg");
         gameBG.tint = tintColor;
@@ -101,6 +107,8 @@ playGame.prototype = {
         var bottomWallBG = game.add.tileSprite(0, (game.height + gameBackgroundHeight)/2, game.width, game.height/2, "wall");
         bottomWallBG.tint = tintColor;
         bottomWallBG.tileScale.y = -1;
+        
+        landscape = game.add.tileSprite(0, 242, game.width, landscapeHeight, "landscape");
         
         this.wizard = game.add.sprite(100, 423, "wizard");
         this.wizard.anchor.set(0.5);
