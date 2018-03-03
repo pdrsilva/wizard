@@ -23,19 +23,19 @@ body {
 }
 
 #upperDiv {
-    height: 20%;
+    height: 30%;
     background-color: blue;
     /*margin: auto;*/
 }
 
 #bottomDiv {
-    height: 20%;
+    height: 30%;
     background-color: red;
     /*margin: auto;*/
 }
 
 #game {
-    height: auto;
+    height: 40%;
     margin: auto;
     background-color: skyblue;
 }

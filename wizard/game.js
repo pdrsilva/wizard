@@ -1,7 +1,7 @@
 var game;
 
 window.onload = function() {
-    game = new Phaser.Game(960,640, Phaser.AUTO, "game");
+    game = new Phaser.Game(1600, 640, Phaser.AUTO, "game");
     game.state.add("Boot", boot);
     game.state.add("Preload", preload);
     game.state.add("TitleScreen", titleScreen);
