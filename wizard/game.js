@@ -1,7 +1,7 @@
 var game;
 
 window.onload = function() {
-    game = new Phaser.Game(960,640, Phaser.AUTO, "");
+    game = new Phaser.Game(960,640, Phaser.AUTO, "game");
     game.state.add("Boot", boot);
     game.state.add("Preload", preload);
     game.state.add("TitleScreen", titleScreen);
@@ -49,11 +49,11 @@ playGame.prototype = {
         var tintColor = bgColor;
         var gameBG = game.add.tileSprite(0, 0, game.width, game.height, "gamebg");
         gameBG.tint = tintColor;
-        var topWallBG = game.add.tileSprite(0, -gameBackgroundHeight/2, game.width, game.height/2, "wall");
-        topWallBG.tint = tintColor;
-        var bottomWallBG = game.add.tileSprite(0, (game.height + gameBackgroundHeight)/2, game.width, game.height/2, "wall");
-        bottomWallBG.tint = tintColor;
-        bottomWallBG.tileScale.y = -1;
+//        var topWallBG = game.add.tileSprite(0, -gameBackgroundHeight/2, game.width, game.height/2, "wall");
+//        topWallBG.tint = tintColor;
+//        var bottomWallBG = game.add.tileSprite(0, (game.height + gameBackgroundHeight)/2, game.width, game.height/2, "wall");
+//        bottomWallBG.tint = tintColor;
+//        bottomWallBG.tileScale.y = -1;
         
         landscape = game.add.tileSprite(0, 242, game.width, landscapeHeight, "landscape");
         

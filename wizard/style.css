@@ -1,0 +1,42 @@
+/*
+    Main page style
+*/
+/* 
+    Created on : 3/mar/2018, 16:40:25
+    Author     : pdrsilva
+*/
+body {
+    background: #000000;
+/*    padding: 0px;
+    margin: 0px;*/
+    /*height: 640px;*/
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+#main {
+    height: 640px;
+    width: 640px;
+    background-color: skyblue;
+    margin: auto;
+}
+
+#upperDiv {
+    height: 20%;
+    background-color: blue;
+    /*margin: auto;*/
+}
+
+#bottomDiv {
+    height: 20%;
+    background-color: red;
+    /*margin: auto;*/
+}
+
+#game {
+    height: auto;
+    margin: auto;
+    background-color: skyblue;
+}
+
