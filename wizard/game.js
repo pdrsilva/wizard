@@ -36,6 +36,7 @@ preload.prototype = {
         game.load.image("wizard", "assets/sprites/wizard.png");
         game.load.image("barrier", "assets/sprites/barrier.png");
         game.load.image("landscape", "assets/sprites/grass.png");
+        game.load.image("ground", "assets/sprites/ground.png");
     },
     create: function(){
         this.game.state.start("TitleScreen");
@@ -46,6 +47,9 @@ var playGame = function(game){};
 playGame.prototype = {
     create: function(){
         landscapeHeight = game.cache.getImage('landscape').height;
+        groundHeight = game.cache.getImage('ground').height;
+        wizardHeight = game.cache.getImage('wizard').height;
+        
         var tintColor = bgColor;
         var gameBG = game.add.tileSprite(0, 0, game.width, game.height, "gamebg");
         gameBG.tint = tintColor;
@@ -54,15 +58,21 @@ playGame.prototype = {
 //        var bottomWallBG = game.add.tileSprite(0, (game.height + gameBackgroundHeight)/2, game.width, game.height/2, "wall");
 //        bottomWallBG.tint = tintColor;
 //        bottomWallBG.tileScale.y = -1;
+                
+        landscape = game.add.tileSprite(0, game.height - landscapeHeight - groundHeight + 25,
+            game.width, landscapeHeight, "landscape");
+        ground = game.add.tileSprite(0, game.height - groundHeight, game.width, groundHeight, "ground");
         
-        landscape = game.add.tileSprite(0, 242, game.width, landscapeHeight, "landscape");
-        
-        this.wizard = game.add.sprite(100, 423, "wizard");
+        this.wizard = game.add.sprite(100, game.height - wizardHeight - groundHeight + 30, "wizard");
         this.wizard.anchor.set(0.5);
         this.game.physics.enable(this.wizard, Phaser.Physics.ARCADE);
         
         this.barrierGroup = game.add.group();
+        this.addLandscape();
         this.addBarrier(this.barrierGroup, tintColor);
+    },
+    addLandscape: function() {
+        
     },
     addBarrier: function(group, tintColor){
         addBarrier(group, tintColor);

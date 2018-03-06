@@ -5,10 +5,11 @@
  */
 
 Barrier = function(game, speed, tintColor){
-    var position = (game.height + gameBackgroundHeight)/2;
+    barrierHeight = game.cache.getImage('barrier').height;
+    var position = (game.height - groundHeight + 5);
     Phaser.Sprite.call(this, game, game.width + 100, position, "barrier");
-    var cropRect = new Phaser.Rectangle(0, 0, 24, gameBackgroundHeight/4);
-    this.crop(cropRect);
+//    var cropRect = new Phaser.Rectangle(0, 0, 24, gameBackgroundHeight/4);
+//    this.crop(cropRect);
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.anchor.set(0.5, 1);
     this.tint = tintColor;
@@ -29,7 +30,7 @@ Barrier.prototype.update = function(){
         this.destroy();
     }
 
-    landscape.tilePosition.x -= 4.5;
+    landscape.tilePosition.x -= 3;
 };
 
 function addBarrier (group, tintColor) {

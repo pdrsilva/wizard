@@ -7,7 +7,10 @@ var bgColor = 0x588c73;
 var gameBackgroundHeight = 256;
 var barrierSpeed = 280;
 var barrierGap = -200;
+var wizardHeight;
 var landscapeHeight;
+var groundHeight;
+var barrierHeight;
 var landscape;
 
 
