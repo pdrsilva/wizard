@@ -1,8 +1,10 @@
 var game;
 var bgColor = 0x588c73;
+//var bgColor = 0xff0000;
 var gameBackgroundHeight = 256;
 var barrierSpeed = 280;
-var barrierGap = -200;
+var barrierGap = 900;
+var wind = false;
 
 Barrier = function(game, speed, tintColor){
     var position = (game.height + gameBackgroundHeight)/2;
@@ -20,10 +22,9 @@ Barrier.prototype = Object.create(Phaser.Sprite.prototype);
 Barrier.prototype.constructor = Barrier;
 
 Barrier.prototype.update = function(){
-    if(this.placeBarrier && this.x > barrierGap){
-        //console.log(this.x);
+    if(this.placeBarrier && game.width - this.x > barrierGap){
         this.placeBarrier = false;
-        //playGame.prototype.addBarrier(this.parent, this.tint);
+        playGame.prototype.addBarrier(this.parent, this.tint);
     }
     if(this.x < 0){
         this.destroy();
@@ -63,8 +64,12 @@ preload.prototype = {
         game.load.image("playbutton", "assets/sprites/playbutton.png");
         game.load.image("gamebg", "assets/sprites/gamebg.png");
         game.load.image("wall", "assets/sprites/wall.png");
-        game.load.image("wizard", "assets/sprites/wizard.png");
+        //game.load.image("wizard", "assets/sprites/wizard.png");
         game.load.image("barrier", "assets/sprites/barrier.png");
+        game.load.spritesheet("button_A", "assets/sprites/button-round-a.png",64,64);
+        game.load.spritesheet("the_wizard", "assets/sprites/mariospritesheet-small.png", 50, 50);
+        game.load.spritesheet("ground", "assets/sprites/2048x48-ground.png",64,64);
+        game.load.image('starfield', 'assets/sprites/starfield.jpg');
     },
     create: function(){
         this.game.state.start("TitleScreen");
@@ -94,7 +99,7 @@ var playGame = function(game){};
 playGame.prototype = {
     create: function(){
         var tintColor = bgColor;
-        var gameBG = game.add.tileSprite(0, 0, game.width, game.height, "gamebg");
+        var gameBG = game.add.tileSprite(0, 0, game.width, game.height, "starfield");
         gameBG.tint = tintColor;
         var topWallBG = game.add.tileSprite(0, -gameBackgroundHeight/2, game.width, game.height/2, "wall");
         topWallBG.tint = tintColor;
@@ -102,9 +107,35 @@ playGame.prototype = {
         bottomWallBG.tint = tintColor;
         bottomWallBG.tileScale.y = -1;
         
-        this.wizard = game.add.sprite(100, 423, "wizard");
+        //add the ground 
+        this.ground = game.add.sprite(0, 447, "ground");
+        game.physics.enable(this.ground, Phaser.Physics.ARCADE);
+        this.ground.body.velocity.x = -barrierSpeed;
+        
+        //create virtual game controller buttons
+        
+        this.button_wind = game.add.button(50, game.height - 100, "button_A", null, this, 0, 1, 0, 1);
+        this.button_wind.fixedToCamera = true;
+        
+        this.button_earth = game.add.button(125, game.height - 100, "button_A", null, this, 0, 1, 0, 1);
+        this.button_earth.fixedToCamera = true;
+        
+        this.button_fire = game.add.button(200, game.height - 100, "button_A", null, this, 0, 1, 0, 1);
+        this.button_fire.fixedToCamera = true;
+        
+        this.button_water = game.add.button(275, game.height - 100, "button_A", null, this, 0, 1, 0, 1);
+        this.button_water.fixedToCamera = true;
+        
+        
+        //setting up the player
+        this.wizard = game.add.sprite(100, 423, "the_wizard");
+        
+        //this.wizard = game.add.sprite(100, 423, "wizard");
+        
         this.wizard.anchor.set(0.5);
+        this.wizard.animations.add("walk", [1,2,3,4], 15, true);
         this.game.physics.enable(this.wizard, Phaser.Physics.ARCADE);
+        this.wizard.animations.play("walk");
         
         this.barrierGroup = game.add.group();
         this.addBarrier(this.barrierGroup, tintColor);
